@@ -1,9 +1,7 @@
 package Mike724.minecraft.WebMarket;
 
 import java.util.logging.Logger;
-
 import org.bukkit.plugin.java.JavaPlugin;
-
 import Mike724.minecraft.WebMarket.util.VaultManager;
 
 public class WebMarket extends JavaPlugin {
@@ -23,5 +21,4 @@ public class WebMarket extends JavaPlugin {
 	public void onDisable() {
 		log.info("Disabled");
 	}
-	//this is a commit
 }
