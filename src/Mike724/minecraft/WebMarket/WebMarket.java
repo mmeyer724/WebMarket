@@ -13,12 +13,11 @@ public class WebMarket extends JavaPlugin {
 		log.info("Enabled");
 		VaultManager.setupEconomy(this);
 		VaultManager.setupPermissions(this); 
-		
-		log.info("I have: "+VaultManager.economy.getBalance("ViiRuSxModz"));
 	}
 	
 	@Override
 	public void onDisable() {
 		log.info("Disabled");
 	}
+	//now we can push it
 }
