@@ -5,19 +5,25 @@ import org.bukkit.plugin.java.JavaPlugin;
 import Mike724.minecraft.WebMarket.util.VaultManager;
 
 public class WebMarket extends JavaPlugin {
-	
+
 	public Logger log;
 
 	public void onEnable() {
 		log = this.getLogger();
 		log.info("Enabled");
 		VaultManager.setupEconomy(this);
-		VaultManager.setupPermissions(this); 
+		VaultManager.setupPermissions(this);
+		
+		//Run player info HTTP server
+		try {
+			PlayerHttpServer phs = new PlayerHttpServer();
+			phs.start();
+		} catch (Exception e) {
+		}
 	}
-	
+
 	@Override
 	public void onDisable() {
 		log.info("Disabled");
 	}
-	//now we can push it
 }
