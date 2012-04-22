@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
-
 import com.mike724.webmarket.util.*;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -17,14 +15,14 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class PlayerHttpServer {
-	private Logger log;
+	
 	public void start() throws IOException  {
 		InetSocketAddress addr = new InetSocketAddress(Settings.HTTPPORT);
 		HttpServer server = HttpServer.create(addr, 0);
 		server.createContext("/", new Handler());
 		server.setExecutor(Executors.newCachedThreadPool());
 		server.start();
-		log.info("Player HTTP server is listening on port " + Settings.HTTPPORT);
+		Log.log.info("HTTP server is listening on port " + Settings.HTTPPORT);
 	}
 }
 

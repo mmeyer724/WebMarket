@@ -1,25 +1,24 @@
 package com.mike724.webmarket;
 
-import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import com.mike724.webmarket.util.Settings;
 import com.mike724.webmarket.util.VaultManager;
 
 public class WebMarket extends JavaPlugin {
 
-	public Logger log;
-
 	public void onEnable() {
-		log = this.getLogger();
-		log.info("Enabled");
+		Log.setLogger(this.getLogger());
 		
+		//Get economy instance from Vault, disable if failed.
 		if(VaultManager.setupEconomy(this)) {
-			log.info("Setup economy correctly");
+			Log.log.info("Setup economy correctly");
 		} else {
-			log.severe("Could not setup economy!");
+			Log.log.severe("Could not setup economy!");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
 		}
 		
+		//Set settings
 		Settings.setSK(this.getConfig().getString("secret-key"));
 		Settings.setPort(this.getConfig().getInt("http-port"));
 		
@@ -28,11 +27,14 @@ public class WebMarket extends JavaPlugin {
 			PlayerHttpServer phs = new PlayerHttpServer();
 			phs.start();
 		} catch (Exception e) {
+			Log.log.severe("COULD NOT SETUP HTTP SERVER, IS THE PORT OPEN?");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
 		}
+		Log.log.info("Enabled sucessfully");
 	}
-
 	@Override
 	public void onDisable() {
-		log.info("Disabled");
+		Log.log.info("Disabled");
 	}
 }
