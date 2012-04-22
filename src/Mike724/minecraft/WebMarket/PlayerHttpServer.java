@@ -31,7 +31,6 @@ public class PlayerHttpServer {
 class Handler implements HttpHandler {
 
 	private static HashMap<String, String> GetPlayerData(String player) {
-		//TODO: USE VAULT TO GET CORRECT DATA
 		HashMap<String, String> Data = new HashMap<String, String>();
 		Data.put("name", player);
 		Data.put("balance", ""+VaultManager.economy.getBalance(player));
@@ -47,14 +46,27 @@ class Handler implements HttpHandler {
 			String[] args = exchange.getRequestURI().toASCIIString().split("/");
 			args = Arrays.copyOfRange(args, 1, args.length);
 
-			if(args[1].equalsIgnoreCase(Settings.SECRETKEY)) {
-				HashMap<String,String> Data = GetPlayerData(args[0]);
-				String Response = "";
-				for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
+			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
+				if(args[1] == "get")
+				{
+					HashMap<String,String> Data = GetPlayerData(args[0]);
+					String Response = "";
+					for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
 					Map.Entry<String, String> hm = i.next();
 					Response += hm.getKey() + ":" + hm.getValue() + "\n";
+					}
+					responseBody.write(Response.getBytes());
 				}
-				responseBody.write(Response.getBytes());
+				if(args[1] == "add")
+				{
+					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
+					responseBody.write(args[3]+" added".getBytes();
+				}
+				if(args[1] == "subtract")
+				{
+					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
+					responseBody.write(args[3]+" subtracted".getBytes();
+				}
 			}
 			else responseBody.write("invalid".getBytes());
 			responseBody.close();
