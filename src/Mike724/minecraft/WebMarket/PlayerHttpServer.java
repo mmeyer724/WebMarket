@@ -37,8 +37,8 @@ class Handler implements HttpHandler {
 		return Data;
 	}
 
-	private void OutputBalance(OutputStream responseBody) {
-		HashMap<String,String> Data = GetPlayerData(args[0]);
+	private void OutputBalance(OutputStream responseBody, String player) {
+		HashMap<String,String> Data = GetPlayerData(player);
 		String Response = "";
 		for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
 			Map.Entry<String, String> hm = i.next();
@@ -57,19 +57,16 @@ class Handler implements HttpHandler {
 			args = Arrays.copyOfRange(args, 1, args.length);
 
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
-				if(args[1].equalsIgnoreCase("get"))
-				{
-					OutputBalance(responseBody);
-				}
+				if(args[1].equalsIgnoreCase("get")) OutputBalance(responseBody,args[0]);
 				if(args[1].equalsIgnoreCase("add"))
 				{
 					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(responseBody);
+					utputBalance(responseBody,args[0]);
 				}
 				if(args[1] .equalsIgnoreCase("subtract"))
 				{
 					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(responseBody);
+					utputBalance(responseBody,args[0]);
 				}
 			}
 			else responseBody.write("invalid".getBytes());
