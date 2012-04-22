@@ -1,3 +1,2 @@
-WebMarket:
-	secret-key: 'djkeijfdkl' #Must be the same as in the website config file
-	http-port: 8080 #This port must be open
+secret-key: 'djkeijfdkl' #Must be the same as in the website config file
+http-port: 8080 #This port must be open
