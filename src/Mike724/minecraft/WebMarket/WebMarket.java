@@ -2,8 +2,6 @@ package Mike724.minecraft.WebMarket;
 
 import java.util.logging.Logger;
 
-import net.milkbowl.vault.Vault;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Mike724.minecraft.WebMarket.util.Settings;
