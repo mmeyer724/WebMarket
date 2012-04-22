@@ -47,7 +47,7 @@ class Handler implements HttpHandler {
 			args = Arrays.copyOfRange(args, 1, args.length);
 
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
-				if(args[1] == "get")
+				if(args[1].equalsIgnoreCase("get"))
 				{
 					HashMap<String,String> Data = GetPlayerData(args[0]);
 					String Response = "";
@@ -57,15 +57,15 @@ class Handler implements HttpHandler {
 					}
 					responseBody.write(Response.getBytes());
 				}
-				if(args[1] == "add")
+				if(args[1].equalsIgnoreCase("add"))
 				{
 					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					responseBody.write((args[3]+" added").getBytes());
+					responseBody.write((args[2]+" added").getBytes());
 				}
-				if(args[1] == "subtract")
+				if(args[1] .equalsIgnoreCase("subtract"))
 				{
 					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					responseBody.write((args[3]+" subtracted").getBytes());
+					responseBody.write((args[2]+" subtracted").getBytes());
 				}
 			}
 			else responseBody.write("invalid".getBytes());
