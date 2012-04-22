@@ -61,21 +61,21 @@ class Handler implements HttpHandler {
 			args = Arrays.copyOfRange(args, 1, args.length);
 
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
-				switch(args[1]) {
-					case equalsIgnoreCase("get"): 
+				switch(args[1].toLowerCase()) {
+					case "get": 
 						OutputBalance(responseBody,args[2]); 
-					break;
-					case equalsIgnoreCase("add"):
+						break;
+					case "add":
 						VaultManager.economy.depositPlayer(args[2], Double.parseDouble(args[3]));
 						OutputBalance(responseBody,args[2]);
-					break;
-					case equalsIgnoreCase("subtract"):
+						break;
+					case "subtract":
 						VaultManager.economy.withdrawPlayer(args[2], Double.parseDouble(args[3]));
 						OutputBalance(responseBody,args[2]);
-					break;
-					case default:
+						break;
+					default:
 						responseBody.write("invalid action".getBytes());
-					break;
+						break;
 				}
 				
 			}
