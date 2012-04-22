@@ -13,17 +13,17 @@ public class VaultManager {
 	public static boolean setupEconomy(JavaPlugin plugin) {
 		if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        economy = rsp.getProvider();
-        return economy != null;
-    }
-    public static boolean setupPermissions(JavaPlugin plugin) {
-        RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
-        permission = rsp.getProvider();
-        return permission != null;
-    }
+		}
+		RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+		if (rsp == null) {
+			return false;
+		}
+		economy = rsp.getProvider();
+		return economy != null;
+	}
+	public static boolean setupPermissions(JavaPlugin plugin) {
+		RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
+		permission = rsp.getProvider();
+		return permission != null;
+	}
 }
