@@ -34,7 +34,7 @@ class Handler implements HttpHandler {
 		//TODO: USE VAULT TO GET CORRECT DATA
 		HashMap<String, String> Data = new HashMap<String, String>();
 		Data.put("name", player);
-		Data.put("balance", "0");
+		Data.put("balance", ""+VaultManager.economy.getBalance(player));
 		return Data;
 	}
 
