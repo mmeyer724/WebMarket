@@ -61,12 +61,12 @@ class Handler implements HttpHandler {
 				if(args[1].equalsIgnoreCase("add"))
 				{
 					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					utputBalance(responseBody,args[0]);
+					OutputBalance(responseBody,args[0]);
 				}
 				if(args[1] .equalsIgnoreCase("subtract"))
 				{
 					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					utputBalance(responseBody,args[0]);
+					OutputBalance(responseBody,args[0]);
 				}
 			}
 			else responseBody.write("invalid".getBytes());
