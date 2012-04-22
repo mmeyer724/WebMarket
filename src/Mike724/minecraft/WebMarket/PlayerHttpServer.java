@@ -59,17 +59,17 @@ class Handler implements HttpHandler {
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
 				if(args[1].equalsIgnoreCase("get"))
 				{
-					OutputBalance(OutputStream responseBody)
+					OutputBalance(responseBody);
 				}
 				if(args[1].equalsIgnoreCase("add"))
 				{
 					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(OutputStream responseBody)
+					OutputBalance(responseBody);
 				}
 				if(args[1] .equalsIgnoreCase("subtract"))
 				{
 					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(OutputStream responseBody)
+					OutputBalance(responseBody);
 				}
 			}
 			else responseBody.write("invalid".getBytes());
