@@ -53,7 +53,7 @@ class Handler implements HttpHandler {
 
 	public void handle(HttpExchange exchange) throws IOException {
 			Headers responseHeaders = exchange.getResponseHeaders();
-			responseHeaders.set("Content-Type", "text/plain");
+			responseHeaders.set("Content-Type", "text/plain"); 
 			exchange.sendResponseHeaders(200, 0);
 			OutputStream responseBody = exchange.getResponseBody();
 
