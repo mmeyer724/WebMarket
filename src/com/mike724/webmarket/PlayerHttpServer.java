@@ -50,7 +50,7 @@ class Handler implements HttpHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void handle(HttpExchange exchange) throws IOException {
 			Headers responseHeaders = exchange.getResponseHeaders();
 			responseHeaders.set("Content-Type", "text/plain");
@@ -61,17 +61,23 @@ class Handler implements HttpHandler {
 			args = Arrays.copyOfRange(args, 1, args.length);
 
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
-				if(args[1].equalsIgnoreCase("get")) OutputBalance(responseBody,args[0]);
-				if(args[1].equalsIgnoreCase("add"))
-				{
-					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(responseBody,args[0]);
+				switch(args[1]) {
+					case equalsIgnoreCase("get"): 
+						OutputBalance(responseBody,args[2]); 
+					break;
+					case equalsIgnoreCase("add"):
+						VaultManager.economy.depositPlayer(args[2], Double.parseDouble(args[3]));
+						OutputBalance(responseBody,args[2]);
+					break;
+					case equalsIgnoreCase("subtract"):
+						VaultManager.economy.withdrawPlayer(args[2], Double.parseDouble(args[3]));
+						OutputBalance(responseBody,args[2]);
+					break;
+					case default:
+						responseBody.write("invalid action".getBytes());
+					break;
 				}
-				if(args[1] .equalsIgnoreCase("subtract"))
-				{
-					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					OutputBalance(responseBody,args[0]);
-				}
+				
 			}
 			else responseBody.write("invalid".getBytes());
 			responseBody.close();
