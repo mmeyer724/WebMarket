@@ -60,7 +60,7 @@ class Handler implements HttpHandler {
 			String[] args = exchange.getRequestURI().toASCIIString().split("/");
 			args = Arrays.copyOfRange(args, 1, args.length);
 
-			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
+			if(args[0].equalsIgnoreCase(Settings.SECRETKEY)) {
 				switch(args[1].toLowerCase()) {
 					case "get": 
 						OutputBalance(responseBody,args[2]); 
