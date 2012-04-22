@@ -1,4 +1,4 @@
-package Mike724.minecraft.WebMarket.util;
+package com.mike724.webmarket.util;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;

@@ -1,5 +1,4 @@
-package Mike724.minecraft.WebMarket;
-import Mike724.minecraft.WebMarket.util.*;
+package com.mike724.webmarket;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,6 +10,7 @@ import java.util.Iterator;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
+import com.mike724.webmarket.util.*;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

@@ -1,4 +1,4 @@
 name: WebMarket
-main: Mike724.minecraft.WebMarket.WebMarket
+main: com.mike724.webmarket.WebMarket
 version: 1
 depend: [Vault]
