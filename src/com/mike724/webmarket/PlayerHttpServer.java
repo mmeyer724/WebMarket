@@ -42,7 +42,7 @@ class Handler implements HttpHandler {
 		String Response = "";
 		for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
 			Map.Entry<String, String> hm = i.next();
-			Response += hm.getKey() + ":" + hm.getValue() + "\n";
+			Response += hm.getKey() + ":" + hm.getValue() + ",";
 		}
 		try {
 			responseBody.write(Response.getBytes());
