@@ -24,7 +24,7 @@ public class PlayerHttpServer {
 		server.createContext("/", new Handler());
 		server.setExecutor(Executors.newCachedThreadPool());
 		server.start();
-		log.info("WebMarket player HTTP server is listening on port " + Settings.HTTPPORT);
+		log.info("Player HTTP server is listening on port " + Settings.HTTPPORT);
 	}
 }
 
