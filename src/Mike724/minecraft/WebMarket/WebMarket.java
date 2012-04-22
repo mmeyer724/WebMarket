@@ -1,9 +1,7 @@
 package Mike724.minecraft.WebMarket;
 
 import java.util.logging.Logger;
-
 import org.bukkit.plugin.java.JavaPlugin;
-
 import Mike724.minecraft.WebMarket.util.Settings;
 import Mike724.minecraft.WebMarket.util.VaultManager;
 
