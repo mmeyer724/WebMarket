@@ -37,6 +37,16 @@ class Handler implements HttpHandler {
 		return Data;
 	}
 
+	private void OutputBalance(OutputStream responseBody) {
+		HashMap<String,String> Data = GetPlayerData(args[0]);
+		String Response = "";
+		for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
+			Map.Entry<String, String> hm = i.next();
+			Response += hm.getKey() + ":" + hm.getValue() + "\n";
+		}
+		responseBody.write(Response.getBytes());
+	}
+	
 	public void handle(HttpExchange exchange) throws IOException {
 			Headers responseHeaders = exchange.getResponseHeaders();
 			responseHeaders.set("Content-Type", "text/plain");
@@ -49,23 +59,17 @@ class Handler implements HttpHandler {
 			if(args[3].equalsIgnoreCase(Settings.SECRETKEY)) {
 				if(args[1].equalsIgnoreCase("get"))
 				{
-					HashMap<String,String> Data = GetPlayerData(args[0]);
-					String Response = "";
-					for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
-					Map.Entry<String, String> hm = i.next();
-					Response += hm.getKey() + ":" + hm.getValue() + "\n";
-					}
-					responseBody.write(Response.getBytes());
+					OutputBalance(OutputStream responseBody)
 				}
 				if(args[1].equalsIgnoreCase("add"))
 				{
 					VaultManager.economy.depositPlayer(args[0], Double.parseDouble(args[2]));
-					responseBody.write((args[2]+" added").getBytes());
+					OutputBalance(OutputStream responseBody)
 				}
 				if(args[1] .equalsIgnoreCase("subtract"))
 				{
 					VaultManager.economy.withdrawPlayer(args[0], Double.parseDouble(args[2]));
-					responseBody.write((args[2]+" subtracted").getBytes());
+					OutputBalance(OutputStream responseBody)
 				}
 			}
 			else responseBody.write("invalid".getBytes());
