@@ -19,19 +19,16 @@ import com.sun.net.httpserver.HttpServer;
 public class PlayerHttpServer {
 	private Logger log;
 	public void start() throws IOException  {
-		Settings settings = new Settings();
-		InetSocketAddress addr = new InetSocketAddress(settings.HTTPPORT);
+		InetSocketAddress addr = new InetSocketAddress(Settings.HTTPPORT);
 		HttpServer server = HttpServer.create(addr, 0);
 		server.createContext("/", new Handler());
 		server.setExecutor(Executors.newCachedThreadPool());
 		server.start();
-		log.info("WebMarket player HTTP server is listening on port " + settings.HTTPPORT);
+		log.info("WebMarket player HTTP server is listening on port " + Settings.HTTPPORT);
 	}
 }
 
 class Handler implements HttpHandler {
-
-	Settings settings = new Settings();
 
 	private static HashMap<String, String> GetPlayerData(String player) {
 		HashMap<String, String> Data = new HashMap<String, String>();
@@ -49,7 +46,7 @@ class Handler implements HttpHandler {
 			String[] args = exchange.getRequestURI().toASCIIString().split("/");
 			args = Arrays.copyOfRange(args, 1, args.length);
 
-			if(args[1].equalsIgnoreCase(settings.SECRETKEY)) {
+			if(args[1].equalsIgnoreCase(Settings.SECRETKEY)) {
 				HashMap<String,String> Data = GetPlayerData(args[0]);
 				String Response = "";
 				for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
