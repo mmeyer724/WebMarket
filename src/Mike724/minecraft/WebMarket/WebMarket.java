@@ -12,8 +12,12 @@ public class WebMarket extends JavaPlugin {
 	public void onEnable() {
 		log = this.getLogger();
 		log.info("Enabled");
-		VaultManager.setupEconomy(this);
-		VaultManager.setupPermissions(this);
+		
+		if(VaultManager.setupEconomy(this)) {
+			log.info("Setup economy correctly");
+		} else {
+			log.severe("Could not setup economy!");
+		}
 		
 		Settings.setSK(this.getConfig().getString("secret-key"));
 		Settings.setPort(this.getConfig().getInt("http-port"));
