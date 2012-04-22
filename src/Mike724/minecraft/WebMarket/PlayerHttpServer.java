@@ -1,4 +1,5 @@
 package Mike724.minecraft.WebMarket;
+import Mike724.minecraft.WebMarket.util.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,31 +9,29 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-//TODO: need to change this class to use bukkit config and remove mains
 public class PlayerHttpServer {
-	public static void main(String args[]) throws IOException {
-		if(args.length == 0) main(8080);
-		else main(Integer.parseInt(args[0]));
-	}
-	public static void main(int Port) throws IOException {
-		InetSocketAddress addr = new InetSocketAddress(Port);
+	private Logger log;
+	public void start() throws IOException  {
+		Settings settings = new Settings();
+		InetSocketAddress addr = new InetSocketAddress(settings.HTTPPORT);
 		HttpServer server = HttpServer.create(addr, 0);
 		server.createContext("/", new Handler());
 		server.setExecutor(Executors.newCachedThreadPool());
 		server.start();
-		System.out.println("Server is listening on port " + Port);
+		log.info("WebMarket player HTTP server is listening on port " + settings.HTTPPORT);
 	}
 }
 
 class Handler implements HttpHandler {
 
-	private String ConfigKey = "key";
+	Settings settings = new Settings();
 
 	private static HashMap<String, String> GetPlayerData(String player) {
 		HashMap<String, String> Data = new HashMap<String, String>();
@@ -50,7 +49,7 @@ class Handler implements HttpHandler {
 			String[] args = exchange.getRequestURI().toASCIIString().split("/");
 			args = Arrays.copyOfRange(args, 1, args.length);
 
-			if(args[1].equalsIgnoreCase(ConfigKey)) {
+			if(args[1].equalsIgnoreCase(settings.SECRETKEY)) {
 				HashMap<String,String> Data = GetPlayerData(args[0]);
 				String Response = "";
 				for (Iterator<Map.Entry<String, String>> i = Data.entrySet().iterator(); i.hasNext();) {
