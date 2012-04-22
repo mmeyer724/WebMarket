@@ -19,7 +19,7 @@ import com.sun.net.httpserver.HttpServer;
 public class PlayerHttpServer {
 	private Logger log;
 	public void start() throws IOException  {
-		InetSocketAddress addr = new InetSocketAddress(Settings.HTTPPORT);
+		InetSocketAddress addr = new InetSocketAddress(Settings.HTTPPORT); 
 		HttpServer server = HttpServer.create(addr, 0);
 		server.createContext("/", new Handler());
 		server.setExecutor(Executors.newCachedThreadPool());
