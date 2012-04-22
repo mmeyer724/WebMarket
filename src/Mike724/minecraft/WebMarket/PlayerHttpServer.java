@@ -44,7 +44,11 @@ class Handler implements HttpHandler {
 			Map.Entry<String, String> hm = i.next();
 			Response += hm.getKey() + ":" + hm.getValue() + "\n";
 		}
-		responseBody.write(Response.getBytes());
+		try {
+			responseBody.write(Response.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void handle(HttpExchange exchange) throws IOException {
