@@ -7,6 +7,8 @@ import com.mike724.webmarket.util.VaultManager;
 public class WebMarket extends JavaPlugin {
 
 	public void onEnable() {
+		
+		//Set the logger this plugin will use
 		Log.setLogger(this.getLogger());
 		
 		//Get economy instance from Vault, disable if failed.
@@ -17,6 +19,9 @@ public class WebMarket extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
 		}
+		
+		//Copy default config.yml to plugin data folder
+		this.getConfig().options().copyDefaults();
 		
 		//Set settings
 		Settings.setSK(this.getConfig().getString("secret-key"));
