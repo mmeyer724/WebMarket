@@ -27,7 +27,7 @@ public class WebMarket extends JavaPlugin {
 		Settings.setSK(this.getConfig().getString("secret-key"));
 		Settings.setPort(this.getConfig().getInt("http-port"));
 		
-		//Run player info HTTP server
+		//Run player info HTTP server 
 		try {
 			PlayerHttpServer phs = new PlayerHttpServer();
 			phs.start();
