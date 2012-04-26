@@ -1,10 +1,10 @@
 package com.mike724.webmarket.Claims;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ClaimsManager {
 	
-	public static HashMap getClaims(String name) {
+	public static ArrayList<Claim> getClaims(String name) {
 		return null;
 	}
 	public static boolean addClaim(String name, Claim claim) {
